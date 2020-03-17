@@ -17,21 +17,25 @@ The messages will send via incoming webooks, which need to be configured on Slac
 - [Teams](https://docs.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/add-incoming-webhook)
 
 
-## Installation
-
-
 ### Cloudformation
 
-Includes:
+
+## Installation
+
+The installation is automated with Infrastructure as Code using CloudFormation. 
+
+The stack includes:
 
 - Lambda basic execution role
 - Permission for Cloudwatch Events to invoke Lambda
 - CW Event Rules
 - Python Lambda
 
-Create as a new Cloudformation Stack and provide your WebhookUrl. Choose which Messenger format you would like to use (Slack or MS Teams).
-
 ### AWS CLI
+
+WebhookUrl: Incoming Webhook Url to send messages to
+Messenger: slack / msteams
+
 ```
 aws cloudformation create-stack --stack-name MyStackName --template-body file://CF-PipelineNotification.yaml --capabilities CAPABILITY_IAM
 ```
