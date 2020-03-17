@@ -15,8 +15,8 @@ Setup of incoming webooks:
 
 
 ## Installation
-- ![Slack](https://api.slack.com/messaging/webhooks)
-- ![Teams](https://docs.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/add-incoming-webhook)
+- [Slack](https://api.slack.com/messaging/webhooks)
+- [Teams](https://docs.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/add-incoming-webhook)
 
 ### Cloudformation
 
