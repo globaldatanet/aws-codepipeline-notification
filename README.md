@@ -33,11 +33,10 @@ The stack includes:
 
 ### AWS CLI
 
-| Parameter  | Second Header |
-| ------------- | ------------- |
-| WebhookUrl  | Incoming Webhook Url  |
-| Messenger  | slack / msteams  |
-
 ```
 aws cloudformation create-stack --stack-name MyStackName --template-body file://CF-PipelineNotification.yaml --capabilities CAPABILITY_IAM
 ```
+| Parameter   | Value |
+| ----------- | ------------- |
+| WebhookUrl  | Incoming Webhook Url  |
+| Messenger  | slack or msteams  |
