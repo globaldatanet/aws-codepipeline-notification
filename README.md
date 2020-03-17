@@ -11,12 +11,14 @@ Cloudwatch Events Rule trigger a Lambda which sends out basic information about 
 
 ## Webhooks
 
-Setup of incoming webooks:
+The messages will send via incoming webooks, which need to be configured on Slack or Microsoft Teams
+
+- [Slack](https://api.slack.com/messaging/webhooks)
+- [Teams](https://docs.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/add-incoming-webhook)
 
 
 ## Installation
-- [Slack](https://api.slack.com/messaging/webhooks)
-- [Teams](https://docs.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/add-incoming-webhook)
+
 
 ### Cloudformation
 
