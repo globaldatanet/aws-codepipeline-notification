@@ -16,10 +16,6 @@ The messages will send via incoming webooks, which need to be configured on Slac
 - [Slack](https://api.slack.com/messaging/webhooks)
 - [Teams](https://docs.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/add-incoming-webhook)
 
-
-### Cloudformation
-
-
 ## Installation
 
 The installation is automated with Infrastructure as Code using CloudFormation. 
