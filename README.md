@@ -4,6 +4,8 @@ A simple notification application sending different status of your AWS CodePipel
 
 Cloudwatch Events Rule trigger a Lambda which sends out basic information about the state of your CodePipeline to either Slack or MS Teams in the appropriate Format using an incoming Webhook API.
 
+![Webhook Notification Diagramm](/webhook-notification-graph.png)
+
 ## Preview
 ![Slack](/slack-screenshot.png)
 
@@ -30,7 +32,7 @@ The stack includes:
 ### AWS CLI
 
 ```
-aws cloudformation create-stack --stack-name MyStackName --template-body file://CF-PipelineNotification.yaml --capabilities CAPABILITY_IAM
+aws cloudformation create-stack --stack-name MyStackName --template-body file://CF-PipelineNotification.yaml --parameters ParameterKey=WebhookUrl,ParameterValue=<YourWebhookUrl>,ParameterKey=Env,ParameterValue=<slack/msteams> --capabilities CAPABILITY_IAM
 ```
 | Parameter   | Value |
 | ----------- | ------------- |
