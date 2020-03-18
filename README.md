@@ -52,7 +52,3 @@ aws cloudformation deploy \
     Env=<slack/msteams>
 ```
 
-| Parameter   | Value |
-| ----------- | ------------- |
-| WebhookUrl  | Incoming Webhook Url  |
-| Env  | slack or msteams  |
