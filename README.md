@@ -31,10 +31,26 @@ The stack includes:
 
 ### AWS CLI
 
+Package and upload to S3:
 ```
-aws cloudformation create-stack --stack-name MyStackName --template-body file://CF-PipelineNotification.yaml --parameters ParameterKey=WebhookUrl,ParameterValue=<YourWebhookUrl>,ParameterKey=Env,ParameterValue=<slack/msteams> --capabilities CAPABILITY_IAM
+aws cloudformation package \
+    --template-file  CF-PipelineNotification.yaml\
+    --s3-bucket wk-pipeline-test-bucket \
+    --output-template-file packaged-PipelineNotification.yaml
 ```
+
+Deploy as a Cloudformation stack:
+```
+aws cloudformation deploy \
+    --template-file packaged-PipelineNotification.yaml \
+    --stack-name CF-PipelineNotification \
+    --capabilities CAPABILITY_IAM \
+    --parameter-overrides \
+    WebhookUrl=<YourWebhookUrl> \
+    Env=<slack/msteams>
+```
+
 | Parameter   | Value |
 | ----------- | ------------- |
 | WebhookUrl  | Incoming Webhook Url  |
-| Messenger  | slack or msteams  |
+| Env  | slack or msteams  |
