@@ -7,8 +7,10 @@ Cloudwatch Events Rule trigger a Lambda which sends out basic information about 
 ![Webhook Notification Diagramm](/.readme-assets/webhook-notification-graph.png)
 
 ## Preview
+### Slack:
 ![Slack](/.readme-assets/slack-screenshot.png)
 
+### MS Teams:
 ![MS Teams](/.readme-assets/msteams-screenshot.png)
 
 ## Webhooks
