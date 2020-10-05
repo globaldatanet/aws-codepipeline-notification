@@ -78,7 +78,7 @@ def lambda_handler(event, context):
                 "fields": Slack["info"],
                 "footer": "globaldatanet",
                 "footer_icon": "https://pbs.twimg.com/profile_images/980056498847010816/JZeg2oTx_400x400.jpg",
-                "ts": 1584369590, #TimeStamp for last update
+                "ts": 1601538665, #TimeStamp for last update
                 "actions": [ { "type": "button", "text": { "type": "Open in AWS", "text": "Link Button" }, "url": pipelineURL } ]
         }
     ]

@@ -16,7 +16,7 @@ Parameters:
   WebhookUrl:
       Type: String
       Default: webhook_url
-      Description: Incoming Webhook Url to send messages to
+      Description: Incoming Webhook URL to send messages to
 
 #-----------------------------------------------------------------------------
 #Resources
@@ -74,7 +74,7 @@ Resources:
   NotifyLambda:
     Type: AWS::Lambda::Function
     Properties:
-      FunctionName: CF-WebhookNotification
+      FunctionName: CF-PipelineNotification
       Description: Sends information about the CodePipeline Status to messengers (Slack/Ms-Teams)
       Environment:
         Variables:
@@ -83,7 +83,7 @@ Resources:
       Handler: index.lambda_handler
       Runtime: python3.6
       Role: !GetAtt LambdaBasicExecutionRole.Arn
-      Code: WebhookNotification.py
+      Code: PipelineNotification.py
   
   CloudWatchRuleFailed:
     Type: AWS::Events::Rule
