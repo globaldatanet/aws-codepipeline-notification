@@ -1,8 +1,8 @@
 # AWS CodePipeline Notification
 
-A simple notification application sending different status of your AWS CodePipeline to Slack or MS Teams using an incoming Webhook. You will get notified for any failed state and the approval action only.
+A simple notification application sending different status of your AWS CodePipeline to Slack or MS Teams using an incoming Webhook. You will get notified for any failed state and the approval action only (additional states need new CW Event Rules).
 
-Cloudwatch Events Rule trigger a Lambda which sends out basic information about the state of your CodePipeline to either Slack or MS Teams in the appropriate Format using an incoming Webhook API.
+Cloudwatch Events Rule trigger a Lambda which sends out information about the state of your CodePipeline to either Slack or MS Teams in the appropriate Format using an incoming Webhook API.
 
 ![Webhook Notification Diagramm](/.readme-assets/webhook-notification-graph.png)
 
