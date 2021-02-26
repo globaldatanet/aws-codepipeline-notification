@@ -1,7 +1,6 @@
 import json
 import logging
 import os
-import time
 import re
 import botocore.vendored.requests as requests
 
@@ -29,7 +28,7 @@ def lambda_handler(event, context):
     stage = message['detail']['stage']
     state = message['detail']['state']
     action = message['detail']['action']
-    category = message['detail']['type']['category']
+    # category = message['detail']['type']['category']
     
     # set the color depending on state/category for Approval
     color = "#808080"
@@ -51,20 +50,39 @@ def lambda_handler(event, context):
     stateString = "State"
     actionString = "Action"
     dateString = re.split('T|Z',eventTime)
-    dateString = dateString[0]+" "+dateString[1]
-    pipelineURL = "https://"+awsRegion+".console.aws.amazon.com/codesuite/codepipeline/pipelines/"+pipeline+"/view?region="+awsRegion
+    dateString = f'{dateString[0]} {dateString[1]}'
+    pipelineURL = f"https://{awsRegion}.console.aws.amazon.com/codesuite/codepipeline/pipelines/{pipeline}/view?region={awsRegion}"
     
     # MS Teams data
     MSTeams = {
         "title": "%s" % title,
-        "info": [ { "facts": [{ "name": accountString, "value": awsAccountId }, { "name": regionString, "value": awsRegion }, { "name": timeString, "value": dateString }, { "name": stageString, "value": stage }, { "name": actionString, "value": action }, { "name": stateString, "value": state }], "markdown": 'true' } ],
-        "link": [ { "@type": "OpenUri", "name": "Open in AWS", "targets": [ { "os": "default", "uri": pipelineURL } ] } ]
+        "info": [ 
+            { "facts":
+                [{ "name": accountString, "value": awsAccountId },
+                 { "name": regionString, "value": awsRegion },
+                 { "name": timeString, "value": dateString },
+                 { "name": stageString, "value": stage },
+                 { "name": actionString, "value": action },
+                 { "name": stateString, "value": state }], "markdown": 'true' }
+            ],
+        "link": [
+            { "@type": "OpenUri", "name": "Open in AWS", "targets":
+                [
+                    { "os": "default", "uri": pipelineURL }
+                ]
+            }
+        ]
     }
 
     # Slack data
     Slack = {
         "title": pipeline+" - "+state+" @ "+stage,
-        "info": [{ "title": accountString, "value": awsAccountId, "short": 'false' }, { "title": regionString, "value": awsRegion, "short": 'false' }, { "title": timeString, "value": dateString, "short": 'false' }, { "title": actionString, "value": action, "short": 'false' }]
+        "info": [
+            { "title": accountString, "value": awsAccountId, "short": 'false' },
+            { "title": regionString, "value": awsRegion, "short": 'false' },
+            { "title": timeString, "value": dateString, "short": 'false' },
+            { "title": actionString, "value": action, "short": 'false' }
+        ]
     }
  
     # build Slack message
@@ -78,7 +96,7 @@ def lambda_handler(event, context):
                 "fields": Slack["info"],
                 "footer": "globaldatanet",
                 "footer_icon": "https://pbs.twimg.com/profile_images/980056498847010816/JZeg2oTx_400x400.jpg",
-                "ts": 1601538665, #TimeStamp for last update
+                "ts": 1614329539, #TimeStamp for last update
                 "actions": [ { "type": "button", "text": { "type": "Open in AWS", "text": "Link Button" }, "url": pipelineURL } ]
         }
     ]
