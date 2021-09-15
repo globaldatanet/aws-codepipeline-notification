@@ -13,7 +13,7 @@ Cloudwatch Events Rule trigger a Lambda which sends out information about the st
 ### MS Teams:
 ![MS Teams](/.readme-assets/msteams-screenshot.png)
 
-## Webhooks
+## Prerequisites
 
 The messages will send via incoming webooks, which need to be configured on Slack or Microsoft Teams
 
@@ -22,7 +22,7 @@ The messages will send via incoming webooks, which need to be configured on Slac
 
 ## Installation
 
-The installation is automated with Infrastructure as Code using CloudFormation. 
+The installation is automated with Infrastructure as Code using CloudFormation.
 
 The stack includes:
 
@@ -48,7 +48,6 @@ aws cloudformation deploy \
     --stack-name CF-PipelineNotification \
     --capabilities CAPABILITY_IAM \
     --parameter-overrides \
-    WebhookUrl=<YourWebhookUrl> \
-    Env=<slack/msteams>
+        WebhookUrl=<YourWebhookUrl> \
+        Env=<slack/msteams>
 ```
-
