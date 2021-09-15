@@ -5,6 +5,12 @@ Description: Pipeline Notification Lambda
 #Parameters
 #-----------------------------------------------------------------------------
 Parameters:
+
+  LambdaName:
+    Description: Name for the PipelineNotification Lambda
+    Type: String
+    Default: PipelineNotification
+
   Env:
     Type: String
     Default: slack
@@ -46,35 +52,35 @@ Resources:
                   - 'logs:PutLogEvents'
                 Resource: '*'
         Path: /
-        
-  PermissionForEventsToInvokeLambdaApproval: 
+
+  PermissionForEventsToInvokeLambdaApproval:
     Type: AWS::Lambda::Permission
-    Properties: 
-      FunctionName: 
+    Properties:
+      FunctionName:
         !Ref NotifyLambda
       Action: "lambda:InvokeFunction"
       Principal: "events.amazonaws.com"
-      SourceArn: 
-        Fn::GetAtt: 
+      SourceArn:
+        Fn::GetAtt:
           - "CloudWatchRuleApproval"
           - "Arn"
 
-  PermissionForEventsToInvokeLambdaFailed: 
+  PermissionForEventsToInvokeLambdaFailed:
     Type: AWS::Lambda::Permission
-    Properties: 
-      FunctionName: 
+    Properties:
+      FunctionName:
         !Ref NotifyLambda
       Action: "lambda:InvokeFunction"
       Principal: "events.amazonaws.com"
-      SourceArn: 
-        Fn::GetAtt: 
+      SourceArn:
+        Fn::GetAtt:
           - "CloudWatchRuleFailed"
-          - "Arn" 
+          - "Arn"
 
   NotifyLambda:
     Type: AWS::Lambda::Function
     Properties:
-      FunctionName: CF-PipelineNotification
+      FunctionName: !Ref LambdaName
       Description: Sends information about the CodePipeline Status to messengers (Slack/Ms-Teams)
       Environment:
         Variables:
@@ -84,10 +90,10 @@ Resources:
       Runtime: python3.6
       Role: !GetAtt LambdaBasicExecutionRole.Arn
       Code: PipelineNotification.py
-  
+
   CloudWatchRuleFailed:
     Type: AWS::Events::Rule
-    Properties: 
+    Properties:
       Description: CF-Pipeline Notification Rule - FAILED
       EventPattern:
         source:
@@ -96,14 +102,14 @@ Resources:
             state:
               - FAILED
       State: ENABLED
-      Targets: 
-       - 
+      Targets:
+       -
           Arn: !GetAtt NotifyLambda.Arn
           Id: NotifyLambda
 
   CloudWatchRuleApproval:
     Type: AWS::Events::Rule
-    Properties: 
+    Properties:
       Description: CF-Pipeline Notification Rule - APPROVAL
       EventPattern:
         source:
@@ -114,7 +120,7 @@ Resources:
             action:
               - Approval
       State: ENABLED
-      Targets: 
-       - 
+      Targets:
+       -
           Arn: !GetAtt NotifyLambda.Arn
           Id: NotifyLambda
