@@ -4,14 +4,18 @@ import os
 import re
 import requests
 
+
 HOOK_URL = os.environ['WebhookUrl']
 MESSENGER = os.environ['Messenger']
-
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
-def lambda_handler(event, context):
+
+def handler(event, context):
+    '''
+        main handler
+    '''
 
     # start logging
     logger.info(f'Recieved event: {event}')
@@ -36,6 +40,8 @@ def lambda_handler(event, context):
         color = '#00bbff'
     elif state == 'FAILED':
         color = '#ff0000'
+    else:
+        color = '#000000'
 
     date = re.split('T|Z',event_time)
     date = f'{date[0]} {date[1]}'
@@ -60,7 +66,7 @@ def lambda_handler(event, context):
                     'footer': 'globaldatanet',
                     'footer_icon': '''https://pbs.twimg.com/profile_images/980056498847010816/
                                         JZeg2oTx_400x400.jpg''',
-                    'ts': 1631709658, #TimeStamp for last update
+                    'ts': 1639133471, # TimeStamp for last update
                     'actions': [
                         {
                             'type': 'button', 'text':
