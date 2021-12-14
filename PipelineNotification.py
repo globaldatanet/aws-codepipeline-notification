@@ -64,45 +64,45 @@ def handler(event, context):
                         { 'title': 'Action', 'value': action, 'short': 'false' }
                     ],
                     'footer': 'globaldatanet',
-                    'footer_icon': '''https://pbs.twimg.com/profile_images/980056498847010816/
-                                        JZeg2oTx_400x400.jpg''',
-                    'ts': 1639133471, # TimeStamp for last update
-                    'actions': [
-                        {
-                            'type': 'button', 'text':
-                                { 'type': 'Open in AWS', 'text': 'Link Button' },
-                            'url': pipeline_url
-                        }
-                    ]
+                    'footer_icon': '''https://globaldatanet.com/favicon-32x32.png?
+                                        v=57f4e6b648051b21ac9cd99281068c77''',
+                    'ts': 1639133471, # TimeStamp for last code update
+                    'actions': [{
+                        'type': 'button',
+                        'text': {
+                            'type': 'Open in AWS',
+                            'text': 'Link Button'
+                        },
+                        'url': pipeline_url
+                    }],
                 }
             ]
         }
     # build MS Teams message
     elif MESSENGER == 'msteams':
         message_data = {
-            'summary': 'summary',
+            'summary': pipeline,
             '@type': 'MessageCard',
-            '@context': 'https://schema.org/extensions',
+            '@context': 'http://schema.org/extensions',
             'themeColor': color,
-            'title': f'{pipeline}',
-            'sections': [
-                {
-                    'facts': [
-                        { 'name': 'Account', 'value': aws_account_id },
-                        { 'name': 'Region', 'value': aws_region },
-                        { 'name': 'Event time (UTC)', 'value': date },
-                        { 'name': 'Stage', 'value': stage },
-                        { 'name': 'Action', 'value': action },
-                        { 'name': 'State', 'value': state }
-                    ],
-                    'markdown': 'true'
-                }
-            ],
-            'potentialAction': {
-                '@type': 'OpenUri', 'name': 'Open in AWS', 'targets': [
-                        { 'os': 'default', 'uri': pipeline_url }
-                    ]
-            }
+            'sections': [{
+                'facts': [
+                    { 'name': 'Account', 'value': aws_account_id },
+                    { 'name': 'Region', 'value': aws_region },
+                    { 'name': 'Event time (UTC)', 'value': date },
+                    { 'name': 'Stage', 'value': stage },
+                    { 'name': 'Action', 'value': action },
+                    { 'name': 'State', 'value': state }
+                ],
+                'markdown': 'true'
+            }],
+            'potentialAction': [{
+                '@type': 'OpenUri',
+                'name': 'Open in AWS',
+                'targets': [{
+                    'os': 'default', 'uri': pipeline_url
+                }],
+            }],
         }
 
     # send message to webhook
