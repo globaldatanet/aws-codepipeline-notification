@@ -102,3 +102,31 @@ $ cdk synth --app='./lib/integ.xxxx.default.js'
 or
 $ cdk deploy --app='./lib/integ.xxxx.default.js'
 ```
+
+example of codepipeline event for lambda
+```
+{
+    "version": "0",
+    "id": "01234567-EXAMPLE",
+    "detail-type": "CodePipeline Pipeline Execution State Change",
+    "source": "aws.codepipeline",
+    "account": "123456789012",
+    "time": "2020-01-24T22:03:07Z",
+    "region": "us-east-1",
+    "resources": [
+        "arn:aws:codepipeline:us-east-1:123456789012:myPipeline"
+    ],
+    "detail": {
+        "pipeline": "myPipeline",
+        "execution-id": "12345678-1234-5678-abcd-12345678abcd",
+        "execution-trigger": {
+            "trigger-type": "StartPipelineExecution",
+            "trigger-detail": "arn:aws:sts::123456789012:assumed-role/Admin/my-user"
+        },
+        "state": "STARTED",
+        "stage": "test",
+        "action": "Approval",
+        "version": 1
+    }
+}
+```
