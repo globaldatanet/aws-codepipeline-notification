@@ -1989,9 +1989,9 @@ duplexer3@^0.1.4:
   integrity sha1-7gHdHKwO08vH/b6jfcCo8c4ALOI=
 
 electron-to-chromium@^1.4.76:
-  version "1.4.78"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.78.tgz#7a1cf853efafde2c4cf6e86facf3e5792d3541a5"
-  integrity sha512-o61+D/Lx7j/E0LIin/efOqeHpXhwi1TaQco9vUcRmr91m25SfZY6L5hWJDv/r+6kNjboFKgBw1LbfM0lbhuK6Q==
+  version "1.4.80"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.80.tgz#299a1ea3e32810934b4e3c2e4d4cb53136fdab3f"
+  integrity sha512-COsbJCGVYCc/aAY4cd94x1Js3q0r406YKGbdL8LXHg0O9dEjuFEFU/vZneRxBxKo/f1lLHi0YyAR7sbFM+i8Bg==
 
 emittery@^0.8.1:
   version "0.8.1"
@@ -3719,10 +3719,10 @@ jsii-diff@^1.54.0:
     typescript "~3.9.10"
     yargs "^16.2.0"
 
-jsii-docgen@^6.1.27:
-  version "6.1.27"
-  resolved "https://registry.yarnpkg.com/jsii-docgen/-/jsii-docgen-6.1.27.tgz#a403e698c3724fc41961a68ac314c2fcdb36ac67"
-  integrity sha512-4HBnTGLCKp6Q8eLHarjH/KCBBwEd/8WnaRrSTmf1E4ypi4XwLAAXBzPFNuSerztM48LOs1a1zBqzaQL4l2jUSw==
+jsii-docgen@^6.1.28:
+  version "6.1.28"
+  resolved "https://registry.yarnpkg.com/jsii-docgen/-/jsii-docgen-6.1.28.tgz#3b794eac3ec836ea0aefea723861ad7842bb0894"
+  integrity sha512-Vuode0IafW6jG+r7KOWCGVGpAm46DsWMnDas/VJtCxvKJyRbRkNxaCLG2geYHfgKFqxfFeE1jzqJ5yb6GDjkPg==
   dependencies:
     "@jsii/spec" "^1.54.0"
     case "^1.6.3"
@@ -4012,9 +4012,9 @@ lru-cache@^6.0.0:
     yallist "^4.0.0"
 
 lru-cache@^7.3.1, lru-cache@^7.4.1:
-  version "7.4.1"
-  resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-7.4.1.tgz#afe07e885ef0cd5bf99f62f4fa7545d48746d779"
-  integrity sha512-NCD7/WRlFmADccuHjsRUYqdluYBr//n/O0fesCb/n52FoGcgKh8o4Dpm7YIbZwVcDs8rPBQbCZLmWWsp6m+xGQ==
+  version "7.4.2"
+  resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-7.4.2.tgz#92f7b5afe82759f51b216a96fae3bc1828df9712"
+  integrity sha512-Xs3+hFPDSKQmL05Gs6NhvAADol1u9TmLoNoE03ZjszX6a5iYIO3rPUM4jIjoBUJeTaWEBMozjjmV70gvdRfIdw==
 
 make-dir@^3.0.0:
   version "3.1.0"
@@ -4781,10 +4781,10 @@ progress@^2.0.3:
   resolved "https://registry.yarnpkg.com/progress/-/progress-2.0.3.tgz#7e8cf8d8f5b8f239c1bc68beb4eb78567d572ef8"
   integrity sha512-7PiHtLll5LdnKIMw100I+8xJXR5gW2QwWYkT6iJva0bXitZKa/XMrSbdmg3r2Xnaidz9Qumd0VPaMrZlF9V9sA==
 
-projen@^0.52.61:
-  version "0.52.61"
-  resolved "https://registry.yarnpkg.com/projen/-/projen-0.52.61.tgz#9a712a69e225e53b335f49d09672666ec37d8782"
-  integrity sha512-K9Kfa3kWOVkFQkSlzQQvddojRARMVNXdvVeKmi4o5G+g41aHMdOO3zGwa7mwI9Svk2bL6k79tXBXHzFJyzW49A==
+projen@^0.52.62:
+  version "0.52.62"
+  resolved "https://registry.yarnpkg.com/projen/-/projen-0.52.62.tgz#7cd0a025556a761d0bae38c6fb65472af2115576"
+  integrity sha512-rAsOSLdOMpVHSdi7jTFSpD6BY5+NLuDXkcIw3F9YYV0h7AZoo2biUDcDPgpwFkEZi3EAa6yITgkOac45065bCQ==
   dependencies:
     "@iarna/toml" "^2.2.5"
     case "^1.6.3"
@@ -5699,9 +5699,9 @@ typescript@~3.9.10:
   integrity sha512-w6fIxVE/H1PkLKcCPsFqKE7Kv7QUwhU8qQY2MueZXWx5cPZdwFupLgKK3vntcK98BtNHZtAF4LA/yl2a7k8R6Q==
 
 uglify-js@^3.1.4:
-  version "3.15.2"
-  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.15.2.tgz#1ed2c976f448063b1f87adb68c741be79959f951"
-  integrity sha512-peeoTk3hSwYdoc9nrdiEJk+gx1ALCtTjdYuKSXMTDqq7n1W7dHPqWDdSi+BPL0ni2YMeHD7hKUSdbj3TZauY2A==
+  version "3.15.3"
+  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.15.3.tgz#9aa82ca22419ba4c0137642ba0df800cb06e0471"
+  integrity sha512-6iCVm2omGJbsu3JWac+p6kUiOpg3wFO2f8lIXjfEb8RrmLjzog1wTPMmwKB7swfzzqxj9YM+sGUM++u1qN4qJg==
 
 unbox-primitive@^1.0.1:
   version "1.0.1"
