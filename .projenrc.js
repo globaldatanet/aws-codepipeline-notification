@@ -1,6 +1,14 @@
 const {
   awscdk,
 } = require('projen');
+
+const common_exclude = [
+  'cdk.out',
+  'cdk.context.json',
+  'yarn-error.log',
+  'coverage',
+];
+
 const project = new awscdk.AwsCdkConstructLibrary({
   name: 'aws-codepipeline-notification',
   author: 'YutaOkoshi', //TODO:
@@ -17,11 +25,6 @@ const project = new awscdk.AwsCdkConstructLibrary({
   // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
   // devDeps: [],             /* Build dependencies for this module. */
   // packageName: undefined,  /* The "name" in package.json. */
-  common_exclude: [
-    'cdk.out',
-    'cdk.context.json',
-    'yarn-error.log',
-    'coverage',
-  ],
+  gitignore: [...common_exclude],
 });
 project.synth();
