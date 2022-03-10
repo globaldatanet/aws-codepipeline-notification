@@ -106,8 +106,11 @@ def handler(event, context):
             }
         }
     else:
+        logger.debug(f'Not support messenger {MESSENGER}')
         return
 
     # send message to webhook
-    requests.post(HOOK_URL, json.dumps(message_data))
+    logger.debug(f'send message: {message_data}')
+    res = requests.post(HOOK_URL, json.dumps(message_data))
+    logger.debug(f'response: {res}')
     return
