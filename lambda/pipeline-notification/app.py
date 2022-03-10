@@ -43,7 +43,7 @@ def handler(event, context):
     else:
         color = '#000000'
 
-    date = re.split('T|Z',event_time)
+    date = re.split('T|Z', event_time)
     date = f'{date[0]} {date[1]}'
     pipeline_url = f'''https://{aws_region}.console.aws.amazon.com/codesuite/
                         codepipeline/pipelines/{pipeline}/view?region={aws_region}'''
@@ -58,19 +58,20 @@ def handler(event, context):
                     'author_name': f'{pipeline} - {state} @ {stage}',
                     'author_icon': 'https://www.awsgeek.com/AWS-History/icons/AWS-CodePipeline.svg',
                     'fields': [
-                        { 'title': 'Account', 'value': aws_account_id, 'short': 'false' },
-                        { 'title': 'Region', 'value': aws_region, 'short': 'false' },
-                        { 'title': 'Event time (UTC)', 'value': date, 'short': 'false' },
-                        { 'title': 'Action', 'value': action, 'short': 'false' }
+                        {'title': 'Account', 'value': aws_account_id, 'short': 'false'},
+                        {'title': 'Region', 'value': aws_region, 'short': 'false'},
+                        {'title': 'Event time (UTC)',
+                         'value': date, 'short': 'false'},
+                        {'title': 'Action', 'value': action, 'short': 'false'}
                     ],
                     'footer': 'globaldatanet',
                     'footer_icon': '''https://pbs.twimg.com/profile_images/980056498847010816/
                                         JZeg2oTx_400x400.jpg''',
-                    'ts': 1639133471, # TimeStamp for last update
+                    'ts': 1639133471,  # TimeStamp for last update
                     'actions': [
                         {
                             'type': 'button', 'text':
-                                { 'type': 'Open in AWS', 'text': 'Link Button' },
+                                {'type': 'Open in AWS', 'text': 'Link Button'},
                             'url': pipeline_url
                         }
                     ]
@@ -88,20 +89,20 @@ def handler(event, context):
             'sections': [
                 {
                     'facts': [
-                        { 'name': 'Account', 'value': aws_account_id },
-                        { 'name': 'Region', 'value': aws_region },
-                        { 'name': 'Event time (UTC)', 'value': date },
-                        { 'name': 'Stage', 'value': stage },
-                        { 'name': 'Action', 'value': action },
-                        { 'name': 'State', 'value': state }
+                        {'name': 'Account', 'value': aws_account_id},
+                        {'name': 'Region', 'value': aws_region},
+                        {'name': 'Event time (UTC)', 'value': date},
+                        {'name': 'Stage', 'value': stage},
+                        {'name': 'Action', 'value': action},
+                        {'name': 'State', 'value': state}
                     ],
                     'markdown': 'true'
                 }
             ],
             'potentialAction': {
                 '@type': 'OpenUri', 'name': 'Open in AWS', 'targets': [
-                        { 'os': 'default', 'uri': pipeline_url }
-                    ]
+                    {'os': 'default', 'uri': pipeline_url}
+                ]
             }
         }
     else:
