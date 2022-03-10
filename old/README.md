@@ -10,17 +10,13 @@ Cloudwatch Events Rule trigger a Lambda which sends out information about the st
 
 ## Table of contents
 
-- [AWS CodePipeline Notification](#aws-codepipeline-notification)
-  - [Table of contents](#table-of-contents)
-  - [Preview](#preview)
+1. [Preview](#preview)
     - [Slack](#slack)
     - [MS Teams](#ms-teams)
-  - [AWS Lambda Function](#aws-lambda-function)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-- [for contributor](#for-contributor)
-  - [IMPORTANT!](#important)
-  - [to check specific source](#to-check-specific-source)
+2. [AWS Lambda Function](#aws-lambda-function)
+3. [Prerequisites](#prerequisites)
+4. [Installation](#installation)
+    - [AWS CLI](#aws-cli)
 
 ---
 
@@ -67,66 +63,25 @@ The stack includes:
 - CW Event Rules
 - Python Lambda
 
-# for contributor
+### AWS CLI
 
-first step
+Package and upload to S3:
 
-```
-$ yarn
-```
-
-compile in the background
-
-```
-$ yarn watch
-
+```bash
+aws cloudformation package \
+    --template-file  CF-PipelineNotification.yaml\
+    --s3-bucket <YourBucketName> \
+    --output-template-file packaged-PipelineNotification.yaml
 ```
 
-## IMPORTANT!
+Deploy as a Cloudformation stack:
 
-DO NOT EDIT by package.json
-
-
-## to check specific source
-
-once you build your source.
-
-```
-$ yarn build
-```
-
-then, execute synth, deploy etc...
-
-```
-$ cdk synth --app='./lib/integ.xxxx.default.js'
-or
-$ cdk deploy --app='./lib/integ.xxxx.default.js'
-```
-
-example of codepipeline event for lambda
-```
-{
-    "version": "0",
-    "id": "01234567-EXAMPLE",
-    "detail-type": "CodePipeline Pipeline Execution State Change",
-    "source": "aws.codepipeline",
-    "account": "123456789012",
-    "time": "2020-01-24T22:03:07Z",
-    "region": "us-east-1",
-    "resources": [
-        "arn:aws:codepipeline:us-east-1:123456789012:myPipeline"
-    ],
-    "detail": {
-        "pipeline": "myPipeline",
-        "execution-id": "12345678-1234-5678-abcd-12345678abcd",
-        "execution-trigger": {
-            "trigger-type": "StartPipelineExecution",
-            "trigger-detail": "arn:aws:sts::123456789012:assumed-role/Admin/my-user"
-        },
-        "state": "STARTED",
-        "stage": "test",
-        "action": "Approval",
-        "version": 1
-    }
-}
+```bash
+aws cloudformation deploy \
+    --template-file packaged-PipelineNotification.yaml \
+    --stack-name CF-PipelineNotification \
+    --capabilities CAPABILITY_IAM \
+    --parameter-overrides \
+        WebhookUrl=<YourWebhookUrl> \
+        Env=<slack/msteams>
 ```

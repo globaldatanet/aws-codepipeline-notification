@@ -1,0 +1,126 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Pipeline Notification Lambda
+
+#-----------------------------------------------------------------------------
+#Parameters
+#-----------------------------------------------------------------------------
+Parameters:
+
+  LambdaName:
+    Description: Name for the PipelineNotification Lambda
+    Type: String
+    Default: PipelineNotification
+
+  Env:
+    Type: String
+    Default: slack
+    Description: Messenger to recieve Notifications
+    AllowedValues:
+      - slack
+      - msteams
+
+  WebhookUrl:
+      Type: String
+      Default: webhook_url
+      Description: Incoming Webhook URL to send messages to
+
+#-----------------------------------------------------------------------------
+#Resources
+#-----------------------------------------------------------------------------
+Resources:
+  LambdaBasicExecutionRole:
+      Type: AWS::IAM::Role
+      Properties:
+        AssumeRolePolicyDocument:
+          Version: 2012-10-17
+          Statement:
+            - Effect: Allow
+              Principal:
+                Service:
+                  - lambda.amazonaws.com
+              Action:
+                - sts:AssumeRole
+        Policies:
+        - PolicyName: LambdaLoggingRule
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action:
+                  - 'logs:CreateLogGroup'
+                  - 'logs:CreateLogStream'
+                  - 'logs:PutLogEvents'
+                Resource: '*'
+        Path: /
+
+  PermissionForEventsToInvokeLambdaApproval:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName:
+        !Ref NotifyLambda
+      Action: "lambda:InvokeFunction"
+      Principal: "events.amazonaws.com"
+      SourceArn:
+        Fn::GetAtt:
+          - "CloudWatchRuleApproval"
+          - "Arn"
+
+  PermissionForEventsToInvokeLambdaFailed:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName:
+        !Ref NotifyLambda
+      Action: "lambda:InvokeFunction"
+      Principal: "events.amazonaws.com"
+      SourceArn:
+        Fn::GetAtt:
+          - "CloudWatchRuleFailed"
+          - "Arn"
+
+  NotifyLambda:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: !Ref LambdaName
+      Description: Sends information about the CodePipeline Status to messengers (Slack/Ms-Teams)
+      Environment:
+        Variables:
+          WebhookUrl: !Ref WebhookUrl
+          Messenger: !Ref Env
+      Handler: index.lambda_handler
+      Runtime: python3.6
+      Role: !GetAtt LambdaBasicExecutionRole.Arn
+      Code: PipelineNotification.py
+
+  CloudWatchRuleFailed:
+    Type: AWS::Events::Rule
+    Properties:
+      Description: CF-Pipeline Notification Rule - FAILED
+      EventPattern:
+        source:
+          - aws.codepipeline
+        detail:
+            state:
+              - FAILED
+      State: ENABLED
+      Targets:
+       -
+          Arn: !GetAtt NotifyLambda.Arn
+          Id: NotifyLambda
+
+  CloudWatchRuleApproval:
+    Type: AWS::Events::Rule
+    Properties:
+      Description: CF-Pipeline Notification Rule - APPROVAL
+      EventPattern:
+        source:
+            - aws.codepipeline
+        detail:
+            state:
+              - STARTED
+            action:
+              - Approval
+      State: ENABLED
+      Targets:
+       -
+          Arn: !GetAtt NotifyLambda.Arn
+          Id: NotifyLambda
