@@ -1,4 +1,4 @@
-// import * as path from 'path';
+import * as path from 'path';
 import {
   aws_iam as iam,
   aws_lambda as lambda,
@@ -26,9 +26,9 @@ export class PipelineNotification extends Construct {
     const fn = new lambda.Function(this, 'lambda', {
       runtime: lambda.Runtime.PYTHON_3_7,
       code: lambda.Code.fromAsset(
-        'lambda/pipeline-notification',
+        path.join(__dirname, '../lambda/pipeline-notification'),
       ),
-      handler: 'app.lambda_handler',
+      handler: 'app.handler',
       logRetention: logs.RetentionDays.ONE_MONTH,
       environment: {
         WebhookUrl: webhookUrl,
@@ -54,30 +54,15 @@ export class PipelineNotification extends Construct {
       timeout: Duration.seconds(300),
     });
 
-
-    // const queue = new sqs.Queue(this, 'Queue');
     new events.Rule(this, 'rule', {
       enabled: true,
       eventPattern: {
         source: [
           'aws.codepipeline',
         ],
-        detail: [
-          { state: 'STARTED' },
-          { state: 'FAILED' },
-        ],
-        // detailType: [
-        //   'FAILED',
-        // ],
+        detail: { state: ['STARTED', 'FAILED'] },
       },
-      targets: [new targets.LambdaFunction(fn, {
-        // deadLetterQueue: queue, // Optional: add a dead letter queue
-        // maxEventAge: Duration.hours(2), // Optional: set the maxEventAge retry policy
-        // retryAttempts: 2, // Optional: set the max number of retry attempts
-      })],
+      targets: [new targets.LambdaFunction(fn, {})],
     });
-
-    // fn.grantPrincipal()
-
   }
 }

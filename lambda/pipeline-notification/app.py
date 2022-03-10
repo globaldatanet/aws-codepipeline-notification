@@ -104,6 +104,9 @@ def handler(event, context):
                     ]
             }
         }
+    else:
+        return
 
     # send message to webhook
     requests.post(HOOK_URL, json.dumps(message_data))
+    return
