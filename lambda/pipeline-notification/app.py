@@ -21,14 +21,14 @@ def handler(event, context):
     logger.info(f'Recieved event: {event}')
 
     # use data from logs
-    pipeline = event['detail']['pipeline']
-    aws_account_id = event['account']
-    aws_region = event['region']
-    event_time = event['time']
-    stage = event['detail']['stage']
-    state = event['detail']['state']
-    action = event['detail']['action']
-    # category = message['detail']['type']['category']
+    aws_account_id = event.get('account', None)
+    aws_region = event.get('region', None)
+    event_time = event.get('time', None)
+    pipeline = event.get('detail', {}).get('pipeline', None)
+    stage = event.get('detail', {}).get('stage', None)
+    state = event.get('detail', {}).get('state', None)
+    action = event.get('detail', {}).get('action', None)
+    # category = message.get('detail',{}).get('type',{}).get('category',None)
 
     # set the color depending on state/category for Approval
     color = '#808080'
