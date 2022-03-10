@@ -48,6 +48,12 @@ def handler(event, context):
     pipeline_url = f'''https://{aws_region}.console.aws.amazon.com/codesuite/
                         codepipeline/pipelines/{pipeline}/view?region={aws_region}'''
 
+    # notify = ['Build', 'Source', 'Deploy', 'Approval']
+    # if action is None or action not in notify:
+    if action is None:
+        logger.info(f'Not support action {action}')
+        return
+
     # build Slack message
     if MESSENGER == 'slack':
         message_data = {
@@ -106,7 +112,7 @@ def handler(event, context):
             }
         }
     else:
-        logger.debug(f'Not support messenger {MESSENGER}')
+        logger.info(f'Not support messenger {MESSENGER}')
         return
 
     # send message to webhook
