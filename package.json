@@ -31,7 +31,7 @@
     "projen": "npx projen"
   },
   "author": {
-    "name": "YutaOkoshi",
+    "name": "justincase-jp",
     "email": "ookoshiyuuta@gmail.com",
     "organization": false
   },
@@ -66,7 +66,12 @@
     "cdk-constants": "^3.0.3"
   },
   "keywords": [
-    "cdk"
+    "cdk",
+    "codepipeline",
+    "notification",
+    "notify",
+    "slack",
+    "teams"
   ],
   "main": "lib/index.js",
   "license": "Apache-2.0",

@@ -10,13 +10,19 @@ const common_exclude = [
 ];
 
 const project = new awscdk.AwsCdkConstructLibrary({
-  name: 'aws-codepipeline-notification',
-  author: 'YutaOkoshi', //TODO:
+  name: 'aws-codepipeline-notification-cdk-construct',
+  author: 'justincase-jp',
   authorAddress: 'ookoshiyuuta@gmail.com', //TODO:
   cdkVersion: '2.1.0',
   defaultReleaseBranch: 'main',
-  name: 'aws-codepipeline-notification-cdk-construct',
   repositoryUrl: 'https://github.com/justincase-jp/aws-codepipeline-notification-cdk-construct.git',
+  keywords: [
+    'codepipeline',
+    'notification',
+    'notify',
+    'slack',
+    'teams',
+  ],
 
   /* Runtime dependencies of this module. */
   deps: [
